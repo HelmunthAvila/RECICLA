@@ -124,3 +124,49 @@ debe poder recibir archivos. En el administrador de archivos seleccione `uploads
 
 > 💡 **Para la clase:** cree un usuario por aprendiz con rol *ciudadano* y una empresa operadora
 > “de prueba”; así todos publican solicitudes y usted demuestra el flujo completo desde el proyector.
+
+---
+
+## 🧭 Lecciones del despliegue real (recicla.42web.io · septiembre 2026)
+
+Esto fue lo que realmente ocurrió al publicar RECICLA+ y cómo se resolvió.
+Sirve tal cual para el próximo proyecto PHP+MySQL en InfinityFree.
+
+### Datos reales de la cuenta
+- La cuenta agrupa **varios sitios**: por FTP se ven como carpetas hermanas
+  (`amatista.42web.io/htdocs/`, `recicla.42web.io/htdocs/`). Suba siempre dentro de la carpeta
+  del sitio, en su `htdocs`.
+- El servidor MySQL de la cuenta es **`sql304.infinityfree.com`** (el mismo para todas las bases);
+  la base quedó como `if0_42646470_recicla`.
+- **No hay acceso a MySQL desde fuera**: `sql304.infinityfree.com` ni resuelve DNS desde un PC
+  externo. La base se administra **solo** con el phpMyAdmin del panel, o desde PHP dentro del hosting.
+
+### Compatibilidad encontrada
+| Punto | Resultado real |
+|---|---|
+| PHP del hosting | **8.4.25**, con `pdo_mysql`, `mysqli`, `gd`, `fileinfo`, `mbstring` ✅ |
+| `uploads/` | Escribible: las fotos se guardan y se sirven ✅ |
+| `.htaccess` del proyecto | Funciona: `config/`, `database/`, `models/`, `views/` responden **403** y el PHP dentro de `uploads/` **no** se ejecuta (por eso no se usa `php_flag`, que daría error 500) |
+| Funciones desactivadas | `exec`, `shell_exec`, `system`, `sleep`, `set_time_limit`, `getallheaders`, `curl_multi_exec`… (el proyecto no las usa) |
+| `SHOW DATABASES` | Denegado: no se pueden listar bases desde PHP, hay que probar por nombre |
+
+### Tres tropiezos reales (y su solución)
+1. **La importación por phpMyAdmin quedó incompleta.** Entraron categorías, materiales, empresas,
+   vehículos, premios y configuración, pero **`usuarios` quedó vacío**: el sistema abría, pero
+   nadie podía entrar. ➜ Después de importar, **verifique siempre los conteos**
+   (`SELECT COUNT(*) FROM usuarios;` debe dar 5) y, si falta, ejecute de nuevo solo el bloque
+   `INSERT INTO usuarios` del SQL.
+2. **La subida por FTP quedó a medias.** Llegaron 63 de 87 archivos (faltaban `assets/`, `config/`,
+   `controllers/` y `database/`) y el sitio decía “no se puede conectar” porque faltaba
+   `config/config.php`. ➜ Suba **el proyecto completo** y compare el listado del servidor con el del PC.
+3. **`curl` y los scripts automáticos no pasan.** InfinityFree responde un **reto JavaScript**
+   (`aes.js` + cookie `__test`) a quien no parezca un navegador y bloquea los POST.
+   ➜ Verifique con un **navegador real**; para pruebas automáticas, ejecute el script *dentro* del
+   hosting (subirlo por FTP, abrirlo con el navegador y borrarlo al terminar).
+
+### Despliegue exprés (resumen para la próxima vez)
+1. Suba el proyecto completo dentro del `htdocs` del sitio (FTP o ZIP + descomprimir).
+2. Cree la base en *MySQL Databases* e importe **`deploy/infinityfree/recicla_hosting.sql`**.
+3. **Compruebe los conteos**: 5 usuarios, 7 categorías, 23 materiales, 2 empresas, 8 premios.
+4. Cree `config/config.local.php` con host, base, usuario y contraseña del panel, con `APP_DEBUG` en `false`.
+5. Entre con `admin@recicla.local` y **cambie de inmediato las contraseñas de prueba**.
