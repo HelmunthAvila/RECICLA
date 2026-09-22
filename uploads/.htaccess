@@ -1,0 +1,18 @@
+# RECICLA+ | uploads/
+# Se permite descargar las evidencias fotográficas, pero NUNCA ejecutar código.
+# Compatible con Apache (WAMP) y con hosting con PHP-FPM (InfinityFree, cPanel):
+# no se usa php_flag porque en esos servidores provoca error 500.
+Options -Indexes
+
+RemoveHandler .php .phtml .phar .php3 .php4 .php5 .php7 .php8 .pht .shtml
+RemoveType .php .phtml .phar .pht .shtml
+
+<FilesMatch "\.(php|phtml|phar|php\d|pht|shtml|cgi|pl|py|sh|htaccess)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

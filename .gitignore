@@ -1,0 +1,29 @@
+# RECICLA+ | Archivos que NO se suben al repositorio
+
+# Credenciales de la base de datos (locales o del hosting)
+config/config.local.php
+
+# Evidencias cargadas por los usuarios (se conservan solo las carpetas)
+uploads/solicitudes/*
+uploads/recolecciones/*
+uploads/materiales/*
+uploads/premios/*
+!uploads/solicitudes/.gitkeep
+!uploads/recolecciones/.gitkeep
+!uploads/materiales/.gitkeep
+!uploads/premios/.gitkeep
+
+# Respaldos y archivos temporales
+*.bak
+*.log
+*.zip
+*.rar
+*.sql.gz
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Configuración de editores
+.vscode/
+.idea/
+*.swp

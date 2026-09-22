@@ -1,0 +1,181 @@
+/* =====================================================================
+   RECICLA+ | Hoja de estilos (Mobile First · Bootstrap 5)
+   Paleta institucional del reciclaje: verde, azul y amarillo.
+   ===================================================================== */
+:root {
+  --verde:        #2e8800;
+  --verde-oscuro: #1c5202;
+  --verde-claro:  #e8f5e0;
+  --amarillo:     #ffd200;
+  --azul:         #0072bc;
+  --gris-fondo:   #f4f6f8;
+  --texto:        #1f2937;
+  --radio:        .9rem;
+  --sombra:       0 2px 10px rgba(0, 0, 0, .07);
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--gris-fondo);
+  color: var(--texto);
+  /* RNF-02: sin desplazamiento horizontal en móvil */
+  overflow-x: hidden;
+  padding-bottom: 1rem;
+}
+body.con-nav-inferior { padding-bottom: 5.6rem; }
+
+a { text-decoration: none; }
+
+/* ------------------------------------------------------------ navbar */
+.navbar-recicla {
+  background: linear-gradient(135deg, #174305, #1c5202 45%, #2e8800);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .18);
+}
+.navbar-recicla .navbar-brand,
+.navbar-recicla .nav-link,
+.navbar-recicla .btn-usuario { color: #fff; }
+.navbar-recicla .nav-link { font-weight: 500; border-radius: .5rem; padding: .5rem .75rem; }
+.navbar-recicla .nav-link:hover,
+.navbar-recicla .nav-link.active { background: rgba(255, 255, 255, .16); color: #fff; }
+.navbar-recicla .navbar-toggler { border-color: rgba(255, 255, 255, .4); }
+.navbar-recicla .navbar-toggler-icon {
+  filter: invert(1) grayscale(1) brightness(2);
+}
+.marca-icono {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.1rem; height: 2.1rem; border-radius: .6rem;
+  background: var(--amarillo); color: var(--verde-oscuro); font-size: 1.1rem;
+}
+.marca-texto { font-weight: 800; letter-spacing: .3px; }
+.btn-usuario { background: rgba(255, 255, 255, .14); border: 0; border-radius: 2rem; padding: .35rem .8rem; font-weight: 600; }
+.btn-aviso {
+  position: relative; color: #fff; width: 2.3rem; height: 2.3rem; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, .14);
+}
+.badge-aviso { position: absolute; top: -.25rem; right: -.25rem; font-size: .6rem; }
+.btn-claro { background: rgba(255, 255, 255, .16); color: #fff; border: 0; font-weight: 600; }
+.btn-amarillo { background: var(--amarillo); color: var(--verde-oscuro); border: 0; font-weight: 700; }
+
+/* ------------------------------------------------------------ botones */
+.btn { border-radius: .7rem; font-weight: 600; }
+.btn-recicla { background: var(--verde); color: #fff; border: 0; }
+.btn-recicla:hover { background: var(--verde-oscuro); color: #fff; }
+.btn-outline-recicla { border: 2px solid var(--verde); color: var(--verde); background: #fff; }
+.btn-outline-recicla:hover { background: var(--verde); color: #fff; }
+.btn-accion { min-height: 3rem; }          /* RNF-02: botones grandes */
+
+/* ------------------------------------------------------------ tarjetas */
+.tarjeta, .card {
+  border: 0; border-radius: var(--radio); box-shadow: var(--sombra); background: #fff;
+}
+.tarjeta-categoria { border-left: .35rem solid var(--verde); }
+.icono-circulo {
+  width: 3.1rem; height: 3.1rem; border-radius: .85rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; color: #fff; background: var(--verde); flex: 0 0 auto;
+}
+.icono-suave { background: var(--verde-claro); color: var(--verde-oscuro); }
+
+/* ------------------------------------------------------------ hero */
+.hero-recicla {
+  background: linear-gradient(150deg, #174305, #2e8800 60%, #4aa50f);
+  color: #fff; border-radius: var(--radio); padding: 1.6rem 1.25rem;
+}
+.hero-recicla h1 { font-weight: 800; font-size: 1.6rem; line-height: 1.2; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .4rem; background: rgba(255, 255, 255, .18);
+  border-radius: 2rem; padding: .25rem .8rem; font-size: .78rem; font-weight: 600;
+}
+
+/* ------------------------------------------------------------ estados y chips */
+.badge-estado { font-weight: 600; padding: .45em .7em; border-radius: 2rem; }
+.bg-purple { background-color: #6f42c1 !important; }
+.stat-chip {
+  background: #fff; border-radius: var(--radio); box-shadow: var(--sombra);
+  padding: .8rem .6rem; text-align: center; height: 100%;
+}
+.stat-chip .valor { font-size: 1.45rem; font-weight: 800; line-height: 1.1; color: var(--verde-oscuro); }
+.stat-chip .etiqueta { font-size: .74rem; color: #6b7280; text-transform: uppercase; letter-spacing: .3px; }
+.stat-chip .icono { font-size: 1.05rem; color: var(--verde); }
+
+/* ------------------------------------------------------------ formularios */
+.form-label { font-weight: 600; font-size: .88rem; margin-bottom: .25rem; }
+.form-control, .form-select { border-radius: .7rem; padding: .7rem .85rem; border-color: #dfe3e8; }
+.form-control:focus, .form-select:focus { border-color: var(--verde); box-shadow: 0 0 0 .2rem rgba(46, 136, 0, .15); }
+.form-control-lg, .form-select-lg { font-size: 1rem; }
+.tarjeta-form { background: #fff; border-radius: var(--radio); box-shadow: var(--sombra); padding: 1rem; margin-bottom: 1rem; }
+.hint { font-size: .78rem; color: #6b7280; }
+
+/* ------------------------------------------------------------ navegación inferior (ciudadano) */
+.nav-inferior {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 1030;
+  display: flex; justify-content: space-around; align-items: flex-end;
+  background: #fff; border-top: 1px solid #e5e7eb;
+  box-shadow: 0 -2px 14px rgba(0, 0, 0, .08);
+  padding: .35rem .25rem calc(.35rem + env(safe-area-inset-bottom));
+}
+.nav-inferior .ni-item {
+  flex: 1; text-align: center; color: #6b7280; font-size: .68rem; font-weight: 600;
+  display: flex; flex-direction: column; align-items: center; gap: .1rem; padding: .3rem 0; border-radius: .6rem;
+}
+.nav-inferior .ni-item i { font-size: 1.2rem; }
+.nav-inferior .ni-item.activo { color: var(--verde); }
+.nav-inferior .ni-principal {
+  background: var(--verde); color: #fff !important; border-radius: 50%;
+  width: 3.4rem; height: 3.4rem; flex: 0 0 auto; margin-top: -1.2rem;
+  box-shadow: 0 4px 12px rgba(46, 136, 0, .4); justify-content: center;
+}
+.nav-inferior .ni-principal i { font-size: 1.6rem; }
+.nav-inferior .ni-principal span { font-size: .62rem; }
+
+/* ------------------------------------------------------------ línea de estados (RF-10) */
+.linea-estados { display: flex; flex-wrap: wrap; gap: .35rem; }
+.linea-estados .paso {
+  font-size: .72rem; font-weight: 600; padding: .3rem .6rem; border-radius: 2rem;
+  background: #e9ecef; color: #495057;
+}
+.linea-estados .paso.hecho { background: var(--verde-claro); color: var(--verde-oscuro); }
+.linea-estados .paso.actual { background: var(--verde); color: #fff; }
+.linea-estados .paso.cancelado { background: #fde2e2; color: #b02a37; }
+
+/* ------------------------------------------------------------ línea de tiempo */
+.timeline { list-style: none; padding-left: 0; margin: 0; }
+.timeline li { position: relative; padding: 0 0 .9rem 1.6rem; border-left: 2px dashed #cfd6dd; margin-left: .35rem; }
+.timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.timeline li::before {
+  content: ''; position: absolute; left: -.44rem; top: .2rem;
+  width: .8rem; height: .8rem; border-radius: 50%; background: var(--verde); border: 2px solid #fff;
+}
+.timeline .titulo { font-weight: 700; font-size: .86rem; }
+.timeline .fecha { font-size: .74rem; color: #6b7280; }
+
+/* ------------------------------------------------------------ tablas móviles */
+.table-recicla { background: #fff; border-radius: var(--radio); overflow: hidden; }
+.table-recicla thead th { font-size: .76rem; text-transform: uppercase; letter-spacing: .3px; color: #6b7280; background: #f8fafc; border-bottom: 1px solid #e9ecef; }
+.table-recicla td { font-size: .87rem; vertical-align: middle; }
+
+/* ------------------------------------------------------------ imágenes y evidencias */
+.foto-material {
+  width: 100%; height: 9.5rem; object-fit: cover; border-radius: .7rem; background: var(--verde-claro);
+}
+.miniatura { width: 100%; height: 5.5rem; object-fit: cover; border-radius: .6rem; border: 1px solid #e5e7eb; }
+.placeholder-foto {
+  height: 5.5rem; border-radius: .6rem; background: var(--verde-claro); color: var(--verde-oscuro);
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+}
+
+/* ------------------------------------------------------------ pie */
+.pie-recicla { background: #fff; border-top: 1px solid #e5e7eb; padding: 1.25rem 0; margin-top: 1.5rem; font-size: .82rem; }
+
+/* ------------------------------------------------------------ utilidades */
+.texto-verde { color: var(--verde) !important; }
+.bg-verde-claro { background: var(--verde-claro); }
+.seccion-titulo { font-weight: 800; font-size: 1.05rem; }
+.etiqueta-mini { font-size: .72rem; color: #6b7280; text-transform: uppercase; letter-spacing: .3px; }
+.link-foto { display: block; }
+.grid-materiales { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .75rem; }
+
+@media (min-width: 992px) {
+  .hero-recicla { padding: 2.5rem; }
+  .hero-recicla h1 { font-size: 2.2rem; }
+}
