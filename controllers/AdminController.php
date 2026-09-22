@@ -177,7 +177,12 @@ final class AdminController
             flash('danger', $v->primero());
             redirigir('a_puntos');
         }
-        Puntos::ajuste($usuarioId, $puntos, $motivo, (int) (usuarioActual()['id'] ?? 0));
+        try {
+            Puntos::ajuste($usuarioId, $puntos, $motivo, (int) (usuarioActual()['id'] ?? 0));
+        } catch (RuntimeException $e) {
+            flash('danger', $e->getMessage());
+            redirigir('a_puntos');
+        }
         flash('success', 'Se registraron ' . $puntos . ' puntos para ' . $u['nombres'] . ' ' . $u['apellidos'] . '.');
         redirigir('a_puntos');
     }

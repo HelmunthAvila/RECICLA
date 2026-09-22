@@ -148,9 +148,24 @@ final class Puntos
         return $total;
     }
 
-    /** Ajuste manual de puntos por parte del administrador (puede ser negativo). */
+    /**
+     * Ajuste manual de puntos por parte del administrador (puede ser negativo).
+     * Un descuento nunca puede dejar el saldo en negativo: en ese caso se rechaza
+     * con un mensaje claro en lugar de corromper el saldo del ciudadano.
+     */
     public static function ajuste(int $usuarioId, int $puntos, string $descripcion, int $adminId): void
     {
+        if ($puntos < 0) {
+            $disponible = self::saldo($usuarioId);
+            if ($disponible <= 0) {
+                throw new RuntimeException('El ciudadano no tiene puntos disponibles para descontar (saldo actual: 0).');
+            }
+            if (abs($puntos) > $disponible) {
+                throw new RuntimeException('El descuento de ' . number_format(abs($puntos), 0, ',', '.')
+                    . ' puntos supera el saldo disponible del ciudadano ('
+                    . number_format($disponible, 0, ',', '.') . ' puntos). Ajuste no aplicado.');
+            }
+        }
         db()->prepare("INSERT INTO puntos_movimientos (usuario_id, tipo, puntos, descripcion)
                        VALUES (?, 'ajuste', ?, ?)")
             ->execute([$usuarioId, $puntos, $descripcion . ' (ajuste del administrador #' . $adminId . ')']);
