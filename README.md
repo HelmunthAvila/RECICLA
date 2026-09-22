@@ -67,6 +67,22 @@ categorías, solicitudes, recolecciones y reportes.
 
 ## 3. Cuentas de prueba
 
+### 2.1 Publicarlo en un hosting gratuito (InfinityFree)
+
+Guía paso a paso: **[DEPLOY-INFINITYFREE.md](DEPLOY-INFINITYFREE.md)** (crear la cuenta, PHP 8.2,
+base de datos, importar, editar credenciales, subir por FTP o administrador de archivos y probar).
+
+Para hosting se incluyen archivos ya adaptados en `deploy/infinityfree/`:
+
+| Archivo | Para qué sirve |
+|---|---|
+| `recicla_hosting.sql` | Esquema + datos semilla **sin `CREATE DATABASE`** (el hosting ya entrega la base) |
+| `demo_datos_hosting.sql` | Historial de demostración, también sin `CREATE DATABASE` |
+| `config/config.local.php` | Plantilla de credenciales: es el **único archivo que debe editar** en el hosting |
+
+Requisitos del hosting: **PHP 8.0 o superior** (probado en 8.2) con `pdo_mysql`, `mbstring`,
+`fileinfo` y `gd`; Apache con `.htaccess`; permiso de escritura en `uploads/`.
+
 | Rol | Correo | Contraseña |
 |---|---|---|
 | Administrador | `admin@recicla.local` | `Admin123*` |
